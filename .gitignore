@@ -1,0 +1,6 @@
+#ignore all
+*
+
+#then un-ignore the gitignore and the init file that we want
+!.gitignore
+!init.el
