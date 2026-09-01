@@ -15,7 +15,7 @@
   :ensure t
   :config
   (ligature-set-ligatures
-   'prog-mode
+   't
    '("->" "<-" "=>" "==" "===" "!=" "!==" "<=" ">=" "<>" "&&" "||"
      "++" "--" "**" "::" ":::" ":=" "..." ".." "|>" "<|" "<<" ">>"
      "/*" "*/" "//" "///" "/**" "<!--" "-->" "www" "??" "?." "|||"
@@ -28,18 +28,23 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (setq inhibit-startup-screen t)
+;; electric-pair mode is what automatically makes closing brackets etc
 (electric-pair-mode 1)
 
+;;disable arrow keys
 (use-package guru-mode
   :ensure t
   :config
   (guru-global-mode +1))
 
+;;theme
 (use-package zenburn-theme
   :config (load-theme 'zenburn t))
 
+;;terminal
 (use-package vterm :ensure t)
 
+;;the default compile command suggestion
 (setq-default compile-command "cmake --build build")
 
 (setq treesit-language-source-alist
@@ -57,10 +62,14 @@
   :hook ((python-ts-mode c-ts-mode c++-ts-mode) . eglot-ensure))
 
 (use-package orderless
-  :init (setq completion-style '(orderless basic)))
+  :init (setq completion-styles '(orderless basic)))
 
 (use-package corfu
-  :init (global-corfu-mode))
+  :init
+  (setq corfu-auto nil)
+  (global-corfu-mode))
+
+;; Emacs creates this
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -78,8 +87,9 @@
 (use-package vertico
   :init (vertico-mode))
 
-					; my custom commands:
+;; my custom commands:
 
+;;doesnt support switching from h -> c
 (defun toggle-header ()
   (interactive)
   (let ((ext (file-name-extension (buffer-file-name)))
