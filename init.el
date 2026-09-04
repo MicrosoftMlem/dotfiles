@@ -50,7 +50,7 @@
 
 (setq treesit-language-source-alist
       '((python "https://github.com/tree-sitter/tree-sitter-python")
-	(c "https://github.com/tree-sitter/tree-sitter-c")
+	(c "https://github.com/tree-sitter/tree-sitter-c" "v0.21.v")
 	(cpp "https://github.com/tree-sitter/tree-sitter-cpp" "v0.22.0")))
 
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-ts-mode))
@@ -76,8 +76,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(corfu guru-mode ligature orderless vertico vterm zenburn-theme)))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
