@@ -24,9 +24,9 @@
 
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
+(when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (setq inhibit-startup-screen t)
 ;; electric-pair mode is what automatically makes closing brackets etc
 (electric-pair-mode 1)
@@ -45,17 +45,18 @@
 (use-package vterm :ensure t)
 
 ;;the default compile command suggestion
-(setq-default compile-command "cmake --build build")
+;; ../ bc it will be run from src dir usually
+(setq-default compile-command "../run.sh")
 
 (setq treesit-language-source-alist
       '((python "https://github.com/tree-sitter/tree-sitter-python")
 	(c "https://github.com/tree-sitter/tree-sitter-c")
 	(cpp "https://github.com/tree-sitter/tree-sitter-cpp" "v0.22.0")))
 
-(setq major-mode-remap-alist
-      '((python-mode . python-ts-mode)
-	(c-mode . c-ts-mode)
-	(c++-mode . c++-ts-mode)))
+(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.h\\'"   . c++-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.c\\'"   . c-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.py\\'"  . python-ts-mode))
 
 (use-package eglot
   :ensure nil
