@@ -50,16 +50,18 @@
 
 (setq treesit-language-source-alist
       '((python "https://github.com/tree-sitter/tree-sitter-python")
-	(c "https://github.com/tree-sitter/tree-sitter-c" "v0.21.v")
-	(cpp "https://github.com/tree-sitter/tree-sitter-cpp" "v0.22.0")))
-	(tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
-	(typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")))
+	(c "https://github.com/tree-sitter/tree-sitter-c" "v0.21.4")
+	(cpp "https://github.com/tree-sitter/tree-sitter-cpp" "v0.22.0")
+	(c-sharp "https://github.com/tree-sitter/tree-sitter-c-sharp" "v0.23.5")))
+;;	(tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+;;	(typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")))
 
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.h\\'"   . c++-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.c\\'"   . c-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.py\\'"  . python-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.cs\\'"  . csharp-ts-mode))
+;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
 
 (use-package eglot
   :ensure nil
