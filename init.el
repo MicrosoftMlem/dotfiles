@@ -67,6 +67,10 @@
   :ensure nil
   :hook ((python-ts-mode c-ts-mode c++-ts-mode) . eglot-ensure))
 
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               '((csharp-mode csharp-ts-mode) . ("OmniSharp" "-lsp"))))
+
 (use-package orderless
   :init (setq completion-styles '(orderless basic)))
 
@@ -103,3 +107,14 @@
 	  ((string= ext "cpp") (find-file (concat base ".h")))
 	  ((string= ext "c") (find-file (concat base ".h")))
 	   (t (message "no counterpart")))))
+
+;; seperate from the shell function to make it easy
+(defun cmk (dir)
+  "Create DIR if needed, copy CMake template, make src/ and include/."
+  (interactive (list (read-directory-name "Project directory: ")))
+  (let ((dir (file-name-as-directory (expand-file-name dir))))
+    (make-directory dir t)
+    (copy-file "~/.config/cmake-template/CMakeLists.txt" dir)
+    (make-directory (concat dir "src") t)
+    (make-directory (concat dir "include") t)
+    (dired dir)))
