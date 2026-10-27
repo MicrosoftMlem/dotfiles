@@ -50,6 +50,20 @@
 ;; ../ bc it will be run from src dir usually
 (setq-default compile-command "../run.sh")
 
+;; Godot support:
+
+(use-package gdscript-mode
+  :hook (gdscript-mode . eglot-ensure))
+
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+	       '(gdscript-mode . ("localhost" 6005))))
+
+(require 'server)
+(unless (server-running-p) (server-start))
+
+;; End of the godot support
+
 (setq treesit-language-source-alist
       '((python "https://github.com/tree-sitter/tree-sitter-python")
 	(c "https://github.com/tree-sitter/tree-sitter-c" "v0.21.4")
