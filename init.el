@@ -64,6 +64,18 @@
 
 ;; End of the godot support
 
+;; Python support:
+
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               '(python-ts-mode . (lambda (&rest _)
+                                    (let ((local-pyright (expand-file-name ".venv/bin/pyright-langserver" (or (project-root (project-current)) "."))))
+                                      (if (file-executable-p local-pyright)
+                                          (list local-pyright "--stdio")
+                                        '("pyright-langserver" "--stdio")))))))
+
+;; End of the python support
+
 (setq treesit-language-source-alist
       '((python "https://github.com/tree-sitter/tree-sitter-python")
 	(c "https://github.com/tree-sitter/tree-sitter-c" "v0.21.4")
